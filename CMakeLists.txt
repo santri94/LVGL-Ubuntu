@@ -10,6 +10,7 @@ project(santi)
 add_executable(
     santi
     main.cpp
+    GUI.cpp
 )
 
 add_library(lvgl OBJECT EXCLUDE_FROM_ALL)

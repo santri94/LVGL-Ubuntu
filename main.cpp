@@ -5,12 +5,14 @@
 #include "lv_drivers/indev/keyboard.h"
 #include "lv_drivers/indev/mousewheel.h"
 
+#include "GUI.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <unistd.h>
 
-#define DEMO 1
+#define DEMO 0
 
 /**********************
  *  STATIC PROTOTYPES
@@ -28,9 +30,8 @@ int main()
 #if DEMO
     lv_demo_widgets();
 #else
-    auto * obj = lv_obj_create(lv_scr_act());
-    auto * label = lv_label_create(obj);
-    lv_label_set_text(label, "Hi Santi");
+    GUI mainScreen(lv_scr_act());
+    mainScreen.draw();
 #endif
 
     while(1) {
