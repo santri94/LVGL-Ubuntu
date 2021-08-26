@@ -1,4 +1,5 @@
 #include "lvgl.h"
+#include "lv_examples/lv_demo.h"
 #include "lv_drivers/display/monitor.h"
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/keyboard.h"
@@ -8,6 +9,8 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <unistd.h>
+
+#define DEMO 1
 
 /**********************
  *  STATIC PROTOTYPES
@@ -22,10 +25,13 @@ int main()
     lv_init();
     hal_init();
 
-    // lv_demo_widgets();
+#if DEMO
+    lv_demo_widgets();
+#else
     auto * obj = lv_obj_create(lv_scr_act());
     auto * label = lv_label_create(obj);
     lv_label_set_text(label, "Hi Santi");
+#endif
 
     while(1) {
         /* Periodically call the lv_task handler.

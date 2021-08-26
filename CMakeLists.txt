@@ -28,14 +28,24 @@ target_sources(lv_drivers PRIVATE
     ${lv_drivers_sources}
 )
 
-find_package(SDL2 REQUIRED)
-include_directories(santi ${SDL2_INCLUDE_DIRS})
-
 target_link_libraries(lv_drivers PUBLIC lvgl)
 target_include_directories(lv_drivers SYSTEM PUBLIC "lv_sim_vscode_sdl/lv_drivers/")
+
+add_library(lv_examples OBJECT EXCLUDE_FROM_ALL)
+file(GLOB_RECURSE lv_examples_sources "lv_sim_vscode_sdl/lv_examples/src/lv_demo_widgets/*.c")
+target_sources(lv_examples PRIVATE
+    ${lv_examples_sources}
+)
+
+target_link_libraries(lv_examples PUBLIC lvgl)
+target_include_directories(lv_examples SYSTEM PUBLIC "lv_sim_vscode_sdl/lv_examples/src/lv_demo_widgets/")
+
+find_package(SDL2 REQUIRED)
+include_directories(santi ${SDL2_INCLUDE_DIRS})
 
 target_link_libraries(santi PRIVATE
     lvgl
     lv_drivers
+    lv_examples
     ${SDL2_LIBRARIES}
 )
